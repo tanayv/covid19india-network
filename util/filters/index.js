@@ -1,3 +1,3 @@
 import { addStates, removeStates } from './state'
-
-export { addStates, removeStates }
+import { addDistricts, removeDistricts } from "./district"
+export { addStates, removeStates, addDistricts, removeDistricts }

@@ -3,20 +3,19 @@ import { state_node } from '../../images'
 import _ from 'lodash'
 import dotProp from 'dot-prop-immutable'
 
-export const addStates = (graph, patients) => {
-  let states = {}
-  console.log(patients);
-
+export const addDistricts = (graph, patients) => {
+  let districts = {}
+ 
   for (let patientId in patients) {
-    if (!states[hash(patients[patientId].state)]) {
-      states[hash(patients[patientId].state)] = patients[patientId].state
+    if (!districts[hash(patients[patientId].district)]) {
+        districts[hash(patients[patientId].district)] = patients[patientId].district
     }
   }
 
-  for (var key in states) {
+  for (var key in districts) {
     let node = {
       id: key,
-      label: states[key],
+      label: districts[key],
       size: 40,
       shape: 'image',
       image: state_node,
@@ -26,7 +25,7 @@ export const addStates = (graph, patients) => {
 
   for (let patientId in patients) {
     let edge = {
-      from: hash(patients[patientId].state),
+      from: hash(patients[patientId].district),
       to: patients[patientId].patientId,
       length: 250,
       dashes: true,
@@ -43,17 +42,17 @@ export const addStates = (graph, patients) => {
   return graph
 }
 
-export const removeStates = (graph, patients) => {
-  let states = {}
+export const removeDistricts = (graph, patients) => {
+  let districts = {}
   for (let patientId in patients) {
-    if (!states[hash(patients[patientId].state)]) {
-      states[hash(patients[patientId].state)] = patients[patientId].state
+    if (!districts[hash(patients[patientId].district)]) {
+        districts[hash(patients[patientId].district)] = patients[patientId].district
     }
   }
-  for (var key in states) {
+  for (var key in districts) {
     let node = {
       id: key,
-      label: states[key],
+      label: districts[key],
       size: 40,
       shape: 'image',
       image: state_node,
@@ -69,7 +68,7 @@ export const removeStates = (graph, patients) => {
 
   for (let patientId in patients) {
     let edge = {
-      from: hash(patients[patientId].state),
+      from: hash(patients[patientId].district),
       to: patients[patientId].patientId,
       length: 250,
       dashes: true,
@@ -83,7 +82,7 @@ export const removeStates = (graph, patients) => {
     let edgeIndex = _.findIndex(graph.edges, function(o) {
       return (
         o.to == patients[patientId].patientId &&
-        o.from === hash(patients[patientId].state)
+        o.from === hash(patients[patientId].district)
       )
     })
     console.log('edge', edgeIndex)
